@@ -9,12 +9,24 @@ namespace SampleApp1
 {
     public class Memory
     {
-        public Memory() { }
+        public Memory()
+        {
+
+        }
+
         private List<object> memory = new List<object>();
+
         public void AddToMemory(object o)
         {
             memory.Add(o);
         }
+
+        public Boolean IsEmpty()
+        {
+            if (memory.Count() == 0) return true;
+            else return false;
+        }
+
         public void PrintMemory()
         {
             foreach (var item in memory)
