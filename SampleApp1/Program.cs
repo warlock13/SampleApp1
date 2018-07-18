@@ -1,5 +1,5 @@
 ﻿using System;   // импорт базовых классов
-
+// testing gitpush
 namespace SampleApp1    // объявление пространства имен для решения SampleApp1
 {   // Начало тела объявления пространства имен
 
