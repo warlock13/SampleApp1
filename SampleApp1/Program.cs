@@ -16,13 +16,14 @@ namespace SampleApp1    // объявление пространства име�
         SumArray = 9
     }   // конец перечисления
 
-    
     class Program   // инициализация главного класса
-    {   // начало тела класса Program
+    {   // начало тела класса 
+        static readonly string errorMessage = "Incorrect input data";   // поле для чтения
         static void Main(string[] args) // реализация запускающего метода Main
         {   // начало тела метода Main
+            const string TITLE = "RobCo Industries";    // пример константы
             Memory m = new Memory(); // выделили память под объект "Память"
-            Calculator calc = new Calculator("RobCo Industries", m); // инициализация экземпляра класса Calculator
+            Calculator calc = new Calculator(TITLE, m); // инициализация экземпляра класса Calculator
             var menu = calc.GetName() +    // инициализация string-переменной
                 "\n1 - Add" +               // строка
                 "\n2 - Sub" +               // фрагментирована
@@ -68,48 +69,48 @@ namespace SampleApp1    // объявление пространства име�
                             var tuple = calc.GetIntOperands();
                             if (tuple.Item3)
                                 Console.WriteLine("Ans = " + calc.Add(tuple.Item1, tuple.Item2) + "\n");
-                            else Console.WriteLine("Incorrect input data");
+                            else Console.WriteLine(errorMessage);
                             break;  // выход из тела оператора switch
                         case (int)operation.Sub:   // сценарий, если было введено "2"
                             tuple = calc.GetIntOperands();
                             if (tuple.Item3)
                                 Console.WriteLine("Ans = " + calc.Sub(tuple.Item1, tuple.Item2) + "\n");
-                            else Console.WriteLine("Incorrect input data");
+                            else Console.WriteLine(errorMessage);
                             break;  // выход из тела оператора switch
                         case (int)operation.Mul:   // сценарий, если было введено "3"
                             tuple = calc.GetIntOperands();  // инициализация кортежа
                             if (tuple.Item3)    // если признак ошибки отсутствует
                                 // вывести в консоль результат вычисления
                                 Console.WriteLine("Ans = " + calc.Mul(tuple.Item1, tuple.Item2) + "\n");
-                            else Console.WriteLine("Incorrect input data"); // иначе сообщение об ошибке
+                            else Console.WriteLine(errorMessage); // иначе сообщение об ошибке
                             break;  // выход из тела оператора switch
                         case (int)operation.Div:   // сценарий, если было введено "4"
                             var tupleDouble = calc.GetDoubleOperands(); // инициализация котрежа
                             if (tupleDouble.Item3)  // если признак ошибки отсутствует
                                 // вывести в консоль результат вычисления
                                 Console.WriteLine("Ans = " + calc.Div(tupleDouble.Item1, tupleDouble.Item2) + "\n");
-                            else Console.WriteLine("Incorrect input data"); // иначе сообщение об ошибке
+                            else Console.WriteLine(errorMessage); // иначе сообщение об ошибке
                             break;  // выход из тела оператора 
                         case (int)operation.Or: // если было введено "6"
                             tuple = calc.GetIntOperands(); // инициализация кортежа
                             if (tuple.Item3)  // если признак ошибки отсутствует
                                 // вывести в консоль результат вычисления
                                 Console.WriteLine("Ans = " + calc.Or(tuple.Item1, tuple.Item2) + "\n");
-                            else Console.WriteLine("Incorrect input data");
+                            else Console.WriteLine(errorMessage);
                             break;  // выход из тела оператора switch
                         case (int)operation.And:    // если было введено "5"
                             tuple = calc.GetIntOperands();  // ввод с клавиатуры int-операторов
                             if (tuple.Item3)  // если признак ошибки отсутствует
                                 // вывести в консоль результат вычисления
                                 Console.WriteLine("Ans = " + calc.And(tuple.Item1, tuple.Item2) + "\n");
-                            else Console.WriteLine("Incorrect input data"); // иначе сообщение об ошибке
+                            else Console.WriteLine(errorMessage); // иначе сообщение об ошибке
                             break;  // выход из тела оператора switch
                         case (int)operation.Xor:    // если было введено "7"
                             tuple = calc.GetIntOperands(); // кортеж
                             if (tuple.Item3)  // если признак ошибки отсутствует
                                 // вывести в консоль результат вычисления
                                 Console.WriteLine("Ans = " + calc.Xor(tuple.Item1, tuple.Item2) + "\n");
-                            else Console.WriteLine("Incorrect input data"); // сообщение об ошибке
+                            else Console.WriteLine(errorMessage); // сообщение об ошибке
                             break;  // выход из тела оператора switch
                         case (int)operation.Factorial:  // если было введено "8"
                             var tupleSingle = calc.GetSingleOperator(); // ввод N с клавиатуры
@@ -117,7 +118,7 @@ namespace SampleApp1    // объявление пространства име�
                                 // вывести в консоль результат вычисления
                                 Console.WriteLine($"Factorial({tupleSingle.Item1}) = "
                                     + calc.Factorial(tupleSingle.Item1, true) + "\n");
-                            else Console.WriteLine("Incorrect input data"); // иначе ошибка
+                            else Console.WriteLine(errorMessage); // иначе ошибка
                             break;  // выход из тела оператора switch
                         case (int)operation.SumArray:   // если было введено "9"
                             var tupleArray = calc.GetArray();   // ввод массива с клавиатуры
@@ -125,7 +126,7 @@ namespace SampleApp1    // объявление пространства име�
                                 // вывести в консоль результат вычисления
                                 Console.WriteLine("Sum of array = "
                                     + calc.SumArray(tupleArray.Item1) + "\n");
-                            else Console.WriteLine("Incorrect input data"); // иначе ошибка
+                            else Console.WriteLine(errorMessage); // иначе ошибка
                             break; // конец условия
                         default:    // если был введен символ, непредусмотренный консольным меню
                             Console.WriteLine($"The [{key}] key was triggered\n"); // вывод необработанного запроса меню
