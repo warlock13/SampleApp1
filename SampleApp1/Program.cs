@@ -21,7 +21,8 @@ namespace SampleApp1    // объявление пространства име�
     {   // начало тела класса Program
         static void Main(string[] args) // реализация запускающего метода Main
         {   // начало тела метода Main
-            Calculator calc = new Calculator("RobCo Industries"); // инициализация экземпляра класса Calculator
+            Memory m = new Memory(); // выделили память под объект "Память"
+            Calculator calc = new Calculator("RobCo Industries", m); // инициализация экземпляра класса Calculator
             var menu = calc.GetName() +    // инициализация string-переменной
                 "\n1 - Add" +               // строка
                 "\n2 - Sub" +               // фрагментирована
@@ -108,7 +109,7 @@ namespace SampleApp1    // объявление пространства име�
                             if (tupleSingle.Item2)  // если признак ошибки отсутствует
                                 // вывести в консоль результат вычисления
                                 Console.WriteLine($"Factorial({tupleSingle.Item1}) = "
-                                    + calc.Factorial(tupleSingle.Item1) + "\n");
+                                    + calc.Factorial(tupleSingle.Item1, true) + "\n");
                             else Console.WriteLine("Incorrect input data"); // иначе ошибка
                             break;  // выход из тела оператора switch
                         case (int)operation.SumArray:   // если было введено "9"

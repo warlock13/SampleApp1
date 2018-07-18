@@ -8,12 +8,14 @@ namespace SampleApp1
 {
     public class Calculator    // инициализация класса Calculator
     {   // начало тела класса Calculator
-        public Calculator(string name)
+        public Calculator(string name, Memory m)
         {
             this.name = name;
+            this.m = m;
         }
 
-        public string name;
+        private string name;
+        private Memory m = new Memory();
 
         public string GetName()
         {
@@ -22,21 +24,25 @@ namespace SampleApp1
 
         public int Add(int a, int b)   // реализация метода сложения двух операндов
         {   // начало тела метода Add
+            m.AddToMemory($"{a} + {b} = {a+b}");    // сохранение решения в "память"
             return (a + b); // выполнение операции сложения и возврат полученного значения
         }   // конец тела метода Add
 
         public int Sub(int a, int b) // реализация метода вычитания одного операнда из другого
         {   // начало тела метода Sub
+            m.AddToMemory($"{a} - {b} = {a - b}");    // сохранение решения в "память"
             return (a - b); // выполнение операции вычитания и возврат полученного значения
         }   // конец тела метода Sub
 
         public int Mul(int a, int b)   // реализация метода Mul
         {   // начало тела метода Mul
+            m.AddToMemory($"{a} * {b} = {a * b}");    // сохранение решения в "память"
             return (a * b); // выполнение операции умножения и возврат полученного значения
         }   // конец тела метода Mul
 
         public double Div(double a, double b)   // реализация метода Div
         {   // начало тела метода Div
+            m.AddToMemory($"{a} / {b} = {a / b}");    // сохранение решения в "память"
             return (a / b); // выполнение операции деления и возврат полученного значения
         }   // конец тела метода Div
 
@@ -46,6 +52,7 @@ namespace SampleApp1
             var binA = Convert.ToString(a, 2);  // перевод десятеричных чисел в двоичные для наглядности
             var binB = Convert.ToString(b, 2);
             var binR = Convert.ToString(result, 2);
+            m.AddToMemory($"{a} & {b} = {a & b}");    // сохранение решения в "память"
             Console.WriteLine($"{binA} & {binB} = {binR}"); // вывод в консоль входных и выходных данных
                                                             // в двоичном виде для наглядности
             return result;  // возврат полученного результата
@@ -57,6 +64,7 @@ namespace SampleApp1
             var binA = Convert.ToString(a, 2);  // перевод десятеричных чисел в двоичные для наглядности
             var binB = Convert.ToString(b, 2);
             var binR = Convert.ToString(result, 2);
+            m.AddToMemory($"{a} | {b} = {a | b}");    // сохранение решения в "память"
             Console.WriteLine($"{binA} | {binB} = {binR}"); // вывод в консоль входных и выходных данных
                                                             // в двоичном виде для наглядности
             return result;  // возврат полученного результата
@@ -68,15 +76,20 @@ namespace SampleApp1
             var binA = Convert.ToString(a, 2);  // перевод десятеричных чисел в двоичные для наглядности
             var binB = Convert.ToString(b, 2);
             var binR = Convert.ToString(result, 2);
+            m.AddToMemory($"{a} ^ {b} = {a ^ b}");    // сохранение решения в "память"
             Console.WriteLine($"{binA} ^ {binB} = {binR}"); // вывод в консоль входных и выходных данных
                                                             // в двоичном виде для наглядности
             return result;  // возврат полученного результата
         }   // конец тела метода
 
-        public int Factorial(int n) // вычисление факториала
+        public int Factorial(int n, Boolean flag = false) // вычисление факториала
+            /* необязательный параметр flag нужен для того, чтобы в консоль выводился только 
+             * результат из самого верхнего уровня рекурсии, но не писалось при каждом ее вызове
+             */
         {   // начало тела функции
             // рекурсивное вычисление факториала и граничное условие
             int result = (n == 0) ? 1 : n * Factorial(n - 1);
+            if (flag) m.AddToMemory($"Factorial({n}) = {result}");    // сохранение решения в "память"
             return result;  // возврат результата вычисления
         }   // конец тела функции
 
@@ -87,6 +100,7 @@ namespace SampleApp1
             {   // начало тела цикла
                 result += n;    // суммирование элементов массива
             }   // конец тела цикла
+            m.AddToMemory($"Sum of array = {result}");    // сохранение решения в "память"
             return result;  // возврат полученной суммы
         }   // конец тела функции
 
