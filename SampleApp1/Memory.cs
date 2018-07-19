@@ -14,11 +14,16 @@ namespace SampleApp1
 
         }
 
-        private List<object> memory = new List<object>();
+        private List<string> memory = new List<string>();
 
-        public void AddToMemory(object o)
+        //public void AddToMemory(object o)
+        //{
+        //    memory.Add(o);
+        //}
+
+        public string List
         {
-            memory.Add(o);
+            set { memory.Add(value); }
         }
 
         public Boolean IsEmpty()
