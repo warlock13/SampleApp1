@@ -11,7 +11,8 @@ namespace SampleApp1
     {
 
         private static List<string> memory = new List<string>();
-        private static int counter;
+        //private static int counter;
+        public static Counter counter = new Counter();
 
         public static string List
         {
@@ -30,7 +31,7 @@ namespace SampleApp1
             {
                 Console.WriteLine(item);
             }
-            Console.WriteLine($"Operations done: {counter}");
+            Console.WriteLine($"Operations done: {counter.Value}");
         }
 
         public static void Main(String[] args)
