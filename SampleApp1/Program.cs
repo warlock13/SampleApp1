@@ -66,19 +66,19 @@ namespace SampleApp1    // объявление пространства име�
                     switch (intKey)    // оператор выбора
                     {   // начало тела оператора switch
                         case (int)operation.Add:   // сценарий, если было введено "1"
-                            var tuple = calc.GetIntOperands();
+                            var tuple = calc.GetDoubleOperands();
                             if (tuple.Item3)
                                 Console.WriteLine("Ans = " + calc.Add(tuple.Item1, tuple.Item2) + "\n");
                             else Console.WriteLine(errorMessage);
                             break;  // выход из тела оператора switch
                         case (int)operation.Sub:   // сценарий, если было введено "2"
-                            tuple = calc.GetIntOperands();
+                            tuple = calc.GetDoubleOperands();
                             if (tuple.Item3)
                                 Console.WriteLine("Ans = " + calc.Sub(tuple.Item1, tuple.Item2) + "\n");
                             else Console.WriteLine(errorMessage);
                             break;  // выход из тела оператора switch
                         case (int)operation.Mul:   // сценарий, если было введено "3"
-                            tuple = calc.GetIntOperands();  // инициализация кортежа
+                            tuple = calc.GetDoubleOperands();  // инициализация кортежа
                             if (tuple.Item3)    // если признак ошибки отсутствует
                                 // вывести в консоль результат вычисления
                                 Console.WriteLine("Ans = " + calc.Mul(tuple.Item1, tuple.Item2) + "\n");
@@ -92,24 +92,24 @@ namespace SampleApp1    // объявление пространства име�
                             else Console.WriteLine(errorMessage); // иначе сообщение об ошибке
                             break;  // выход из тела оператора 
                         case (int)operation.Or: // если было введено "6"
-                            tuple = calc.GetIntOperands(); // инициализация кортежа
-                            if (tuple.Item3)  // если признак ошибки отсутствует
+                            var tupleInt = calc.GetIntOperands(); // инициализация кортежа
+                            if (tupleInt.Item3)  // если признак ошибки отсутствует
                                 // вывести в консоль результат вычисления
-                                Console.WriteLine("Ans = " + calc.Or(tuple.Item1, tuple.Item2) + "\n");
+                                Console.WriteLine("Ans = " + calc.Or(tupleInt.Item1, tupleInt.Item2) + "\n");
                             else Console.WriteLine(errorMessage);
                             break;  // выход из тела оператора switch
                         case (int)operation.And:    // если было введено "5"
-                            tuple = calc.GetIntOperands();  // ввод с клавиатуры int-операторов
-                            if (tuple.Item3)  // если признак ошибки отсутствует
+                            tupleInt = calc.GetIntOperands();  // ввод с клавиатуры int-операторов
+                            if (tupleInt.Item3)  // если признак ошибки отсутствует
                                 // вывести в консоль результат вычисления
-                                Console.WriteLine("Ans = " + calc.And(tuple.Item1, tuple.Item2) + "\n");
+                                Console.WriteLine("Ans = " + calc.And(tupleInt.Item1, tupleInt.Item2) + "\n");
                             else Console.WriteLine(errorMessage); // иначе сообщение об ошибке
                             break;  // выход из тела оператора switch
                         case (int)operation.Xor:    // если было введено "7"
-                            tuple = calc.GetIntOperands(); // кортеж
-                            if (tuple.Item3)  // если признак ошибки отсутствует
+                            tupleInt = calc.GetIntOperands(); // кортеж
+                            if (tupleInt.Item3)  // если признак ошибки отсутствует
                                 // вывести в консоль результат вычисления
-                                Console.WriteLine("Ans = " + calc.Xor(tuple.Item1, tuple.Item2) + "\n");
+                                Console.WriteLine("Ans = " + calc.Xor(tupleInt.Item1, tupleInt.Item2) + "\n");
                             else Console.WriteLine(errorMessage); // сообщение об ошибке
                             break;  // выход из тела оператора switch
                         case (int)operation.Factorial:  // если было введено "8"
