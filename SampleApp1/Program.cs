@@ -26,8 +26,9 @@ namespace SampleApp1    // объявление пространства име�
             const string TITLE = "RobCo Industries";    // пример константы
             //Memory m = new Memory(); // выделили память под объект "Память"
             Calculator calc = new Calculator(TITLE); // инициализация экземпляра класса Calculator
-            Period period = new Period();
-            var menu = calc.GetName() +    // инициализация string-переменной
+            Period period = new Period();  // инициализацая экземпляра класса Period
+            Stat stat = new Stat();
+            string menu = calc.GetName() +    // инициализация string-переменной
                 "\n1 - Add" +               // строка
                 "\n2 - Sub" +               // фрагментирована
                 "\n3 - Mul" +               // для
@@ -41,10 +42,12 @@ namespace SampleApp1    // объявление пространства име�
                 "\n11 - Years to days" +
                 "\nC - Clear screen" +
                 "\nM - Print Memory" +
+                "\nS - Show statictics" +
                 "\nQ - Exit\n";             
             Console.WriteLine(menu);    // вывод в консоль текстового меню
             while (true)    // цикл с предусловием (бесконечный, т.к. внутри тела есть точка выхода)
             {   // начало тела цикла
+                ++stat.IterationsPassed;
                 var key = Console.ReadLine() + "";  // ввод данных с клавиатуры и запись в переменную
                 key = key.ToUpper();    // перевод входных данных в верхний регистр
 
@@ -55,6 +58,7 @@ namespace SampleApp1    // объявление пространства име�
                 else if (key.Equals("C"))   // проверка альтернативного логического условия
                 {   // начало тела логического условия
                     Console.Clear();    // очистить консоль
+                    stat.ScreenCleared++;
                     Console.WriteLine(menu);    // вывести в консоль текст меню
                 }   // коцен тела логического условия
                 else if (key.Equals("M"))   // проверка альтернативного логического условия
@@ -63,6 +67,10 @@ namespace SampleApp1    // объявление пространства име�
                     if (Memory.IsEmpty()) Console.WriteLine("<empty>");
                     Memory.PrintMemory();    // вывести в консоль состояние памяти
                 }   // коцен тела логического условия
+                else if (key.Equals("S"))   // проверка альтернативного логического условия
+                {   // начало тела логического условия
+                    stat.Display(); // вывод состояние счетчиков в консоль
+                }   // конец тела логического условия
                 else  // при невыполнении вышеперечисленных условий 
                 {   // начало тела блока else
                     int intKey; // инициализация int-ключа для оператора switch
@@ -74,48 +82,48 @@ namespace SampleApp1    // объявление пространства име�
                             var tuple = calc.GetDoubleOperands();
                             if (tuple.Item3)
                                 Console.WriteLine("Ans = " + calc.Add(tuple.Item1, tuple.Item2) + "\n");
-                            else Console.WriteLine(errorMessage);
+                            else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); }
                             break;  // выход из тела оператора switch
                         case (int)operation.Sub:   // сценарий, если было введено "2"
                             tuple = calc.GetDoubleOperands();
                             if (tuple.Item3)
                                 Console.WriteLine("Ans = " + calc.Sub(tuple.Item1, tuple.Item2) + "\n");
-                            else Console.WriteLine(errorMessage);
+                            else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); }
                             break;  // выход из тела оператора switch
                         case (int)operation.Mul:   // сценарий, если было введено "3"
                             tuple = calc.GetDoubleOperands();  // инициализация кортежа
                             if (tuple.Item3)    // если признак ошибки отсутствует
                                 // вывести в консоль результат вычисления
                                 Console.WriteLine("Ans = " + calc.Mul(tuple.Item1, tuple.Item2) + "\n");
-                            else Console.WriteLine(errorMessage); // иначе сообщение об ошибке
+                            else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // иначе сообщение об ошибке
                             break;  // выход из тела оператора switch
                         case (int)operation.Div:   // сценарий, если было введено "4"
                             var tupleDouble = calc.GetDoubleOperands(); // инициализация котрежа
                             if (tupleDouble.Item3)  // если признак ошибки отсутствует
                                 // вывести в консоль результат вычисления
                                 Console.WriteLine("Ans = " + calc.Div(tupleDouble.Item1, tupleDouble.Item2) + "\n");
-                            else Console.WriteLine(errorMessage); // иначе сообщение об ошибке
+                            else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // иначе сообщение об ошибке
                             break;  // выход из тела оператора 
                         case (int)operation.Or: // если было введено "6"
                             var tupleInt = calc.GetIntOperands(); // инициализация кортежа
                             if (tupleInt.Item3)  // если признак ошибки отсутствует
                                 // вывести в консоль результат вычисления
                                 Console.WriteLine("Ans = " + calc.Or(tupleInt.Item1, tupleInt.Item2) + "\n");
-                            else Console.WriteLine(errorMessage);
+                            else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); }
                             break;  // выход из тела оператора switch
                         case (int)operation.And:    // если было введено "5"
                             tupleInt = calc.GetIntOperands();  // ввод с клавиатуры int-операторов
                             if (tupleInt.Item3)  // если признак ошибки отсутствует
                                 // вывести в консоль результат вычисления
                                 Console.WriteLine("Ans = " + calc.And(tupleInt.Item1, tupleInt.Item2) + "\n");
-                            else Console.WriteLine(errorMessage); // иначе сообщение об ошибке
+                            else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // иначе сообщение об ошибке
                             break;  // выход из тела оператора switch
                         case (int)operation.Xor:    // если было введено "7"
                             tupleInt = calc.GetIntOperands(); // кортеж
                             if (tupleInt.Item3)  // если признак ошибки отсутствует
                                 // вывести в консоль результат вычисления
                                 Console.WriteLine("Ans = " + calc.Xor(tupleInt.Item1, tupleInt.Item2) + "\n");
-                            else Console.WriteLine(errorMessage); // сообщение об ошибке
+                            else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // сообщение об ошибке
                             break;  // выход из тела оператора switch
                         case (int)operation.Factorial:  // если было введено "8"
                             var tupleSingle = calc.GetSingleOperator(); // ввод N с клавиатуры
@@ -123,7 +131,7 @@ namespace SampleApp1    // объявление пространства име�
                                 // вывести в консоль результат вычисления
                                 Console.WriteLine($"Factorial({tupleSingle.Item1}) = "
                                     + calc.Factorial(tupleSingle.Item1, true) + "\n");
-                            else Console.WriteLine(errorMessage); // иначе ошибка
+                            else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // иначе ошибка
                             break;  // выход из тела оператора switch
                         case (int)operation.SumArray:   // если было введено "9"
                             var tupleArray = calc.GetArray();   // ввод массива с клавиатуры
@@ -131,7 +139,7 @@ namespace SampleApp1    // объявление пространства име�
                                 // вывести в консоль результат вычисления
                                 Console.WriteLine("Sum of array = "
                                     + calc.SumArray(tupleArray.Item1) + "\n");
-                            else Console.WriteLine(errorMessage); // иначе ошибка
+                            else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // иначе ошибка
                             break; // конец условия
                         case (int)operation.Days:   // если было введено "10"
                             tupleSingle = calc.GetSingleOperator(); // ввод N с клавиатуры
@@ -145,7 +153,7 @@ namespace SampleApp1    // объявление пространства име�
                                 Memory.List = res;  // добавление в историю записи о вычислении
                                 Console.WriteLine($"{res}\n");  // вывод результата в консоль
                             }   // конец логического условия
-                            else Console.WriteLine(errorMessage); // иначе ошибка
+                            else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // иначе ошибка
                             break;  // выход из тела оператора switch
                         case (int)operation.Years:   // если было введено "11"
                             Console.WriteLine("Format: [years] [months] [days]");
@@ -172,10 +180,11 @@ namespace SampleApp1    // объявление пространства име�
                                 Memory.List = res;  // добавление в историю записи о вычислении
                                 Console.WriteLine($"{res}\n");  // вывод результата в консоль
                             }   // конец логического условия
-                            else Console.WriteLine(errorMessage); // иначе ошибка
+                            else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // иначе ошибка
                             break;  // выход из тела оператора switch
                         default:    // если был введен символ, непредусмотренный консольным меню
                             Console.WriteLine($"The [{key}] key was triggered\n"); // вывод необработанного запроса меню
+                            stat.ErrorsOccured++;
                             break;  // выход из тела оператора switch
                     }   // конец тела оператора switch
                 }   // конец тела блока else
