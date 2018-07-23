@@ -15,7 +15,8 @@ namespace SampleApp1    // объявление пространства име�
         Factorial = 8,
         SumArray = 9,
         Days = 10,
-        Years = 11
+        Years = 11,
+        Geometry = 12
     }   // конец перечисления
 
     class Program   // инициализация главного класса
@@ -40,6 +41,7 @@ namespace SampleApp1    // объявление пространства име�
                 "\n9 - SumArray" +
                 "\n10 - Days to years" +
                 "\n11 - Years to days" +
+                "\n12 - Geometry" +
                 "\nC - Clear screen" +
                 "\nM - Print Memory" +
                 "\nS - Show statictics" +
@@ -130,7 +132,7 @@ namespace SampleApp1    // объявление пространства име�
                             if (tupleSingle.Item2)  // если признак ошибки отсутствует
                                 // вывести в консоль результат вычисления
                                 Console.WriteLine($"Factorial({tupleSingle.Item1}) = "
-                                    + calc.Factorial(tupleSingle.Item1, true) + "\n");
+                                    + calc.Factorial((int)tupleSingle.Item1, true) + "\n");
                             else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // иначе ошибка
                             break;  // выход из тела оператора switch
                         case (int)operation.SumArray:   // если было введено "9"
@@ -146,7 +148,7 @@ namespace SampleApp1    // объявление пространства име�
                             if (tupleSingle.Item2)  // если признак ошибки отсутствует
                                                     // вывести в консоль результат вычисления
                             {   // начало логического условия
-                                Day days = new Day { Days = tupleSingle.Item1 };    // инициализация дней
+                                Day days = new Day { Days = (int)tupleSingle.Item1 };    // инициализация дней
                                 period = days;  // перевод дней в года:месяцы:дни
                                 // формирование строки-ответа
                                 string res = $"Years: {period.Years} Months: {period.Months} Days: {period.Days}";
@@ -181,6 +183,56 @@ namespace SampleApp1    // объявление пространства име�
                                 Console.WriteLine($"{res}\n");  // вывод результата в консоль
                             }   // конец логического условия
                             else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // иначе ошибка
+                            break;  // выход из тела оператора switch
+                        case (int)operation.Geometry:   // сценарий, если было введено "12"
+                            // вывод в консоль меню
+                            Console.WriteLine("1 - Circle\n2 - Quadrate\n3 - Rectangle\nAny key to Go Up");
+                            key = Console.ReadLine();   // чтение с клавиатуры выбора в меню
+                            switch (key)    // переключатель условий выбора меню
+                            {   // начало тела блока switch
+                                case "1":   // выбрана окружность
+                                    Console.Write("Enter radius: ");    // запрос входных данных от пользователя
+                                    tupleSingle = calc.GetSingleOperator(); // чтение входных данных
+                                    if (tupleSingle.Item2)  // проверка на корректность входных данных
+                                    {   // начало логического условия
+                                        Circle circle = new Circle { Radius = tupleSingle.Item1 };  // инициализация окружности
+                                        var result = circle.ToString(); // формирование результата и представление в текстовом виде
+                                        Memory.List = result;   // запись результатов в память
+                                        Console.WriteLine(result);  // вывод результатов в консоль
+                                    }   // конец логического условия
+                                    else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // сообщение об ошибки
+                                    break;  // конец сценария
+                                case "2":   // выбран квадрат
+                                    Console.Write("Enter edge: ");  // запрос длины стороны
+                                    tupleSingle = calc.GetSingleOperator(); // ввод стороны
+                                    if (tupleSingle.Item2)  // проверка на корректность
+                                    {   // начало if
+                                        Quadrate quadrate = new Quadrate { Edge = tupleSingle.Item1 };  // инициализация квадрата
+                                        var result = quadrate.ToString();   // подсчет
+                                        Memory.List = result;   // запись в память
+                                        Console.WriteLine(result);  // вывод в консоль
+                                    }   // конец if
+                                    else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // сообщение об ошибке
+                                    break;  // конец сценария
+                                case "3":   // выбран параллелограмм
+                                    Console.WriteLine("Enter height and width: ");  // запрос длины и ширины
+                                    tupleDouble = calc.GetDoubleOperands(); // ввод данных с клавиатуры
+                                    if (tupleDouble.Item3)  // проверка на корректность входных данных
+                                    {   // начало if
+                                        Rectangle rectangle = new Rectangle {   // инициализация фигуры
+                                            Height = tupleDouble.Item1, // выделение длины
+                                            Width = tupleDouble.Item2   // выделение ширины
+                                        };  // конец инициализации
+                                        var result = rectangle.ToString();  // формирование результата
+                                        Memory.List = result;   // запись в память результата
+                                        Console.WriteLine(result);  // вывод в консоль результата
+                                    }   // end if
+                                    else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // сообщение об ошибке
+                                    break;  // конец сценария
+                                default:    // сценарий по-умолчанию (выход из подменю)
+                                    Console.WriteLine("canceled");  // сообщение о выходе из подменю
+                                    break;  // конец сценария
+                            }   // конец тела блока switch
                             break;  // выход из тела оператора switch
                         default:    // если был введен символ, непредусмотренный консольным меню
                             Console.WriteLine($"The [{key}] key was triggered\n"); // вывод необработанного запроса меню

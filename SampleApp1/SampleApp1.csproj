@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Figure.cs" />
     <Compile Include="Period.cs" />
     <Compile Include="Calculator.cs" />
     <Compile Include="Counter.cs" />
