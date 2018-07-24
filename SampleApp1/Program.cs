@@ -42,6 +42,7 @@ namespace SampleApp1    // объявление пространства име�
                 "\n10 - Days to years" +
                 "\n11 - Years to days" +
                 "\n12 - Geometry" +
+                "\nP - Feed the pet" +
                 "\nC - Clear screen" +
                 "\nM - Print Memory" +
                 "\nS - Show statictics" +
@@ -72,6 +73,59 @@ namespace SampleApp1    // объявление пространства име�
                 else if (key.Equals("S"))   // проверка альтернативного логического условия
                 {   // начало тела логического условия
                     stat.Display(); // вывод состояние счетчиков в консоль
+                }   // конец тела логического условия
+                else if (key.Equals("P"))   // проверка альтернативного логического условия
+                {   // начало тела логического условия
+                    Console.WriteLine(
+                    "1 - Call for cat\n" +
+                    "2 - Call for mouse\n" +
+                    "3 - Call for bird\n" +
+                    "Any key to cancel"
+                    );
+                    key = Console.ReadLine();
+                    int intKey; // инициализация int-ключа для оператора switch
+                    try { intKey = int.Parse(key); }    // попытка преобразовать string -> int
+                    catch { intKey = -1; }  // формирование признака наличия ошибки
+                    switch (intKey) // переключатель условий
+                    {   // начало switch
+                        case 1: // выбрали кота
+                            Console.Write("Enter the name of cat you want to call: ");  // запрос клички питомца
+                            Cat cat = new Cat { Name = Console.ReadLine() };    // вводи клички с клавиатуры
+                            Console.WriteLine(
+                                $"The cat {cat.Name} is here and it wants to eat some {cat.Eats()}"
+                                );  // вывод с консоль сообщения об инициализации
+                            Console.Write("Give it some <food_name>: ");    // запрос названия еды
+                            string str = cat.Feed(Console.ReadLine()) + $" and {cat.Moves()} to {cat.Lives()}";  // формирование рузультата
+                            Memory.List = str;  // добавление результата в историю
+                            Console.WriteLine(str); // вывод в консоль резлуьтата
+                            break;  // конец case
+                        case 2: // выбрали мышь
+                            Console.Write("Enter the name of mouse you want to call: ");  // запрос клички питомца
+                            Mouse mouse = new Mouse { Name = Console.ReadLine() };    // вводи клички с клавиатуры
+                            Console.WriteLine(
+                                $"The mouse {mouse.Name} is here and it wants to eat some {mouse.Eats()}"
+                                );  // вывод с консоль сообщения об инициализации
+                            Console.Write("Give it some <food_name>: ");    // запрос названия еды
+                            str = mouse.Feed(Console.ReadLine()) + $" and {mouse.Moves()} to {mouse.Lives()}";   // формирование результата
+                            Memory.List = str;  // добавление результата в историю
+                            Console.WriteLine(str);    // вывод в консоль результата
+                            break;  // конец case
+                        case 3: // выбрали птичку
+                            Console.Write("Enter the name of bird you want to call: ");  // запрос клички питомца
+                            Bird bird = new Bird { Name = Console.ReadLine() };    // вводи клички с клавиатуры
+                            Console.WriteLine(
+                                $"The bird {bird.Name} is here and it wants to eat some {bird.Eats()}"
+                                );  // вывод с консоль сообщения об инициализации
+                            Console.Write("Give it some <food_name>: ");    // запрос названия еды
+                            // вывод в консоль результата
+                            str = bird.Feed(Console.ReadLine()) + $" and {bird.Moves()} to {bird.Lives()}";   // формирование результата
+                            Memory.List = str;  // добавление результата в историю
+                            Console.WriteLine(str);    // вывод в консоль результата
+                            break;  // конец 
+                        default:    // условие по-умолчанию
+                            Console.WriteLine("canceled");  // сообщение об отмене
+                            break;  // конец case
+                        }   // конец switch
                 }   // конец тела логического условия
                 else  // при невыполнении вышеперечисленных условий 
                 {   // начало тела блока else

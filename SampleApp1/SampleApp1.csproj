@@ -32,7 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>SampleApp1.Launcer</StartupObject>
+    <StartupObject>SampleApp1.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />

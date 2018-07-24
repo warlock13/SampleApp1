@@ -1,106 +1,74 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace SampleApp1    // область пространство имен
+{   // начало области
 
-namespace SampleApp1
-{
+    interface IPet  // интерфейс 
+    {   // начало интерфейса
+        string Eats();  // что ест питомец
+        string Feed(string food);   // кормнение питомца 
+        string Moves(); // способ перемещения питомца
+        string Lives(); // где живет питомец
+    }   // конец интерфейса
 
-    interface IPet
-    {
-        string Eats();
-        string Feed(string food);
-        string Moves();
-        string Lives();
-    }
-
-    public abstract class Pet : IPet
-    {
-        public string Name { get; set; }
-        public abstract string Eats();
-        public string Feed(string food)
-        {
-            return this.Eats().Equals(food) ?
-                $"{this.Name} ate some {this.Eats()}" :
+    public abstract class Pet : IPet    // абстратный класс питомец
+    {   // начало класса
+        public string Name { get; set; }    // св-во имя
+        public abstract string Eats();  // абстрактный метод
+        public string Feed(string food) // реализованный метод
+        {   // начало метода
+            return this.Eats().Equals(food) ?           //возвращение резлуьтата 
+                $"{this.Name} ate some {this.Eats()}" : // выполнения тернарного оператора
                 $"{this.Name} did not eat {food}";
-        }
-        public abstract string Lives();
-        public abstract string Moves();
-    }
+        }   // конец метода
+        public abstract string Lives(); // абстрактный метод "живет"
+        public abstract string Moves(); // абстрактный метода "двигается"
+    }   // конец класса
 
-    public class Cat : Pet
-    {
-        public override string Eats()
-        {
-            return "fish";
-        }
-        public override string Lives()
-        {
-            return "box";
-        }
-        public override string Moves()
-        {
-            return "walk";
-        }
-    }
+    public class Cat : Pet  // реализация класса Кот
+    {   // начало класса
+        public override string Eats()   // перегрузка метода
+        {   // наачало метода
+            return "fish";  // возвращение строки
+        }   // конец метода
+        public override string Lives()  // перегрузка метода
+        {   // начлао метода
+            return "box";   // возвращение строки
+        }   // конец метода
+        public override string Moves()  // перегрузка метода
+        {   // начало метода
+            return "walk";  // возвращение строки
+        }   // конец метода
+    }   // конец класса
 
-    public class Mouse : Pet
-    {
-        public override string Eats()
-        {
-            return "cheese";
-        }
-        public override string Lives()
-        {
-            return "cell";
-        }
-        public override string Moves()
-        {
-            return "run";
-        }
-    }
+    public class Mouse : Pet  // реализация класса Кот
+    {   // начало класса
+        public override string Eats()   // перегрузка метода
+        {   // наачало метода
+            return "cheese";  // возвращение строки
+        }   // конец метода
+        public override string Lives()  // перегрузка метода
+        {   // начлао метода
+            return "cell";   // возвращение строки
+        }   // конец метода
+        public override string Moves()  // перегрузка метода
+        {   // начало метода
+            return "run";  // возвращение строки
+        }   // конец метода
+    }   // конец класса
 
-    public class Bird : Pet
-    {
-        public override string Eats()
-        {
-            return "seeds";
-        }
-        public override string Lives()
-        {
-            return "cage";
-        }
-        public override string Moves()
-        {
-            return "fly";
-        }
-    }
-
-    class Launcer
-    {
-        public static void Main(string[] args)
-        {
-            Cat cat = new Cat { Name = "Markiz" };
-            Mouse mouse = new Mouse { Name = "Stuard" };
-            Bird bird = new Bird { Name = "Kiryusha" };
-
-            Console.WriteLine(cat.Feed("fish"));
-            Console.WriteLine(mouse.Feed("cheese"));
-            Console.WriteLine(bird.Feed("seeds"));
-            Console.WriteLine(cat.Feed("seeds"));
-
-            Console.WriteLine($"{cat.Name} likes to {cat.Moves()}");
-            Console.WriteLine($"{mouse.Name} likes to {mouse.Moves()}");
-            Console.WriteLine($"{bird.Name} likes to {bird.Moves()}");
-
-
-
-
-            Console.ReadKey();
-        }
-    }
-
-
+    public class Bird : Pet  // реализация класса Кот
+    {   // начало класса
+        public override string Eats()   // перегрузка метода
+        {   // наачало метода
+            return "seeds";  // возвращение строки
+        }   // конец метода
+        public override string Lives()  // перегрузка метода
+        {   // начлао метода
+            return "cage";   // возвращение строки
+        }   // конец метода
+        public override string Moves()  // перегрузка метода
+        {   // начало метода
+            return "fly";  // возвращение строки
+        }   // конец метода
+    }   // конец класса
     
-}
+}   // конец области
