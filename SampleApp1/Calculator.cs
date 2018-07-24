@@ -14,7 +14,7 @@ namespace SampleApp1
             //this.Memory = Memory;
         }
 
-        private string name;
+        private string name = null;
         //private Memory Memory = new Memory();
 
         public string GetName()
