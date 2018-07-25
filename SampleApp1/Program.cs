@@ -28,6 +28,7 @@ namespace SampleApp1    // объявление пространства име�
             Console.WriteLine(message); // вывод строки в консоль
         }   // конец метода
         static readonly string errorMessage = "Incorrect input data";   // поле для чтения
+        static public event Print errorOccured; // инициализация события
 
         static void Main(string[] args) // реализация запускающего метода Main
         {   // начало тела метода Main
@@ -38,6 +39,7 @@ namespace SampleApp1    // объявление пространства име�
             Calculator calc = new Calculator(TITLE); // инициализация экземпляра класса Calculator
             Period period = new Period();  // инициализацая экземпляра класса Period
             Stat stat = new Stat();
+
             string menu = calc.GetName() +    // инициализация string-переменной
                 "\n1 - Add" +               // строка
                 "\n2 - Sub" +               // фрагментирована
@@ -152,7 +154,7 @@ namespace SampleApp1    // объявление пространства име�
                                 _del = Display; // передача метода делегату
                                 if (_del != null) _del(message); // если указатель не пустой, то выполнить делегируемый метод
                             }
-                            else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); }
+                            else { stat.ErrorsOccured++; errorOccured = Display;  errorOccured(errorMessage); }
                             break;  // выход из тела оператора switch
                         case (int)operation.Sub:   // сценарий, если было введено "2"
                             tuple = calc.GetDoubleOperands();
@@ -163,7 +165,7 @@ namespace SampleApp1    // объявление пространства име�
                                 _del = Display; // передача метода делегату
                                 if (_del != null) _del(message); // если указатель не пустой, то выполнить делегируемый метод
                             }
-                            else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); }
+                            else { stat.ErrorsOccured++; errorOccured = Display;  errorOccured(errorMessage); }
                             break;  // выход из тела оператора switch
                         case (int)operation.Mul:   // сценарий, если было введено "3"
                             tuple = calc.GetDoubleOperands();  // инициализация кортежа
@@ -175,7 +177,7 @@ namespace SampleApp1    // объявление пространства име�
                                 _del = Display; // передача метода делегату
                                 if (_del != null) _del(message); // если указатель не пустой, то выполнить делегируемый метод
                             }
-                            else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // иначе сообщение об ошибке
+                            else { stat.ErrorsOccured++; errorOccured = Display;  errorOccured(errorMessage); } // иначе сообщение об ошибке
                             break;  // выход из тела оператора switch
                         case (int)operation.Div:   // сценарий, если было введено "4"
                             var tupleDouble = calc.GetDoubleOperands(); // инициализация котрежа
@@ -187,7 +189,7 @@ namespace SampleApp1    // объявление пространства име�
                                 _del = Display; // передача метода делегату
                                 if (_del != null) _del(message); // если указатель не пустой, то выполнить делегируемый метод
                             }
-                            else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // иначе сообщение об ошибке
+                            else { stat.ErrorsOccured++; errorOccured = Display;  errorOccured(errorMessage); } // иначе сообщение об ошибке
                             break;  // выход из тела оператора 
                         case (int)operation.Or: // если было введено "6"
                             var tupleInt = calc.GetIntOperands(); // инициализация кортежа
@@ -199,7 +201,7 @@ namespace SampleApp1    // объявление пространства име�
                                 _del = Display; // передача метода делегату
                                 if (_del != null) _del(message); // если указатель не пустой, то выполнить делегируемый метод
                             }
-                            else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); }
+                            else { stat.ErrorsOccured++; errorOccured = Display;  errorOccured(errorMessage); }
                             break;  // выход из тела оператора switch
                         case (int)operation.And:    // если было введено "5"
                             tupleInt = calc.GetIntOperands();  // ввод с клавиатуры int-операторов
@@ -211,7 +213,7 @@ namespace SampleApp1    // объявление пространства име�
                                 _del = Display; // передача метода делегату
                                 if (_del != null) _del(message); // если указатель не пустой, то выполнить делегируемый метод
                             }
-                            else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // иначе сообщение об ошибке
+                            else { stat.ErrorsOccured++; errorOccured = Display;  errorOccured(errorMessage); } // иначе сообщение об ошибке
                             break;  // выход из тела оператора switch
                         case (int)operation.Xor:    // если было введено "7"
                             tupleInt = calc.GetIntOperands(); // кортеж
@@ -223,7 +225,7 @@ namespace SampleApp1    // объявление пространства име�
                                 _del = Display; // передача метода делегату
                                 if (_del != null) _del(message); // если указатель не пустой, то выполнить делегируемый метод
                             }
-                            else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // сообщение об ошибке
+                            else { stat.ErrorsOccured++; errorOccured = Display;  errorOccured(errorMessage); } // сообщение об ошибке
                             break;  // выход из тела оператора switch
                         case (int)operation.Factorial:  // если было введено "8"
                             var tupleSingle = calc.GetSingleOperator(); // ввод N с клавиатуры
@@ -237,7 +239,7 @@ namespace SampleApp1    // объявление пространства име�
                                 _del = Display; // передача метода делегату
                                 if (_del != null) _del(message); // если указатель не пустой, то выполнить делегируемый метод
                             }
-                            else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // иначе ошибка
+                            else { stat.ErrorsOccured++; errorOccured = Display;  errorOccured(errorMessage); } // иначе ошибка
                             break;  // выход из тела оператора switch
                         case (int)operation.SumArray:   // если было введено "9"
                             var tupleArray = calc.GetArray();   // ввод массива с клавиатуры
@@ -251,7 +253,7 @@ namespace SampleApp1    // объявление пространства име�
                                 _del = Display; // передача метода делегату
                                 if (_del != null) _del(message); // если указатель не пустой, то выполнить делегируемый метод
                             }
-                            else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // иначе ошибка
+                            else { stat.ErrorsOccured++; errorOccured = Display;  errorOccured(errorMessage); } // иначе ошибка
                             break; // конец условия
                         case (int)operation.Days:   // если было введено "10"
                             tupleSingle = calc.GetSingleOperator(); // ввод N с клавиатуры
@@ -267,7 +269,7 @@ namespace SampleApp1    // объявление пространства име�
                                 _del = Display; // передача метода делегату
                                 if (_del != null) _del(res);
                             }   // конец логического условия
-                            else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // иначе ошибка
+                            else { stat.ErrorsOccured++; errorOccured = Display;  errorOccured(errorMessage); } // иначе ошибка
                             break;  // выход из тела оператора switch
                         case (int)operation.Years:   // если было введено "11"
                             Console.WriteLine("Format: [years] [months] [days]");
@@ -285,7 +287,7 @@ namespace SampleApp1    // объявление пространства име�
                                 }   // конец тела блока try
                                 catch   // отлов исключения
                                 {   // начало тела блока catch
-                                    Console.WriteLine(errorMessage);    // вывод сообщения об ошибке
+                                    errorOccured = Display;  errorOccured(errorMessage);    // вывод сообщения об ошибке
                                     break;  // выход из тела оператора switch
                                 }   // конец тела блока catch
                                 days = period;  // перевод года:месяцы:дни в дни
@@ -296,7 +298,7 @@ namespace SampleApp1    // объявление пространства име�
                                 _del = Display; // передача метода делегату
                                 if (_del != null) _del(res);
                             }   // конец логического условия
-                            else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // иначе ошибка
+                            else { stat.ErrorsOccured++; errorOccured = Display;  errorOccured(errorMessage); } // иначе ошибка
                             break;  // выход из тела оператора switch
                         case (int)operation.Geometry:   // сценарий, если было введено "12"
                             // вывод в консоль меню
@@ -316,7 +318,7 @@ namespace SampleApp1    // объявление пространства име�
                                         _del = Display; // передача метода делегату
                                         if (_del != null) _del(result);
                                     }   // конец логического условия
-                                    else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // сообщение об ошибки
+                                    else { stat.ErrorsOccured++; errorOccured = Display;  errorOccured(errorMessage); } // сообщение об ошибки
                                     break;  // конец сценария
                                 case "2":   // выбран квадрат
                                     Console.Write("Enter edge: ");  // запрос длины стороны
@@ -330,7 +332,7 @@ namespace SampleApp1    // объявление пространства име�
                                         _del = Display; // передача метода делегату
                                         if (_del != null) _del(result);
                                     }   // конец if
-                                    else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // сообщение об ошибке
+                                    else { stat.ErrorsOccured++; errorOccured = Display;  errorOccured(errorMessage); } // сообщение об ошибке
                                     break;  // конец сценария
                                 case "3":   // выбран параллелограмм
                                     Console.WriteLine("Enter height and width: ");  // запрос длины и ширины
@@ -347,7 +349,7 @@ namespace SampleApp1    // объявление пространства име�
                                         _del = Display; // передача метода делегату
                                         if (_del != null) _del(result);
                                     }   // end if
-                                    else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // сообщение об ошибке
+                                    else { stat.ErrorsOccured++; errorOccured = Display;  errorOccured(errorMessage); } // сообщение об ошибке
                                     break;  // конец сценария
                                 default:    // сценарий по-умолчанию (выход из подменю)
                                     Console.WriteLine("canceled");  // сообщение о выходе из подменю
