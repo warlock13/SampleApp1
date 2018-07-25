@@ -19,20 +19,21 @@ namespace SampleApp1    // объявление пространства име�
         Geometry = 12
     }   // конец перечисления
 
-    public delegate void Print(string message);
+    public delegate void Print(string message); // описание делегата
 
     class Program   // инициализация главного класса
     {   // начало тела класса 
-        public static void Display(string message)
-        {
-            Console.WriteLine(message);
-        }
+        public static void Display(string message)  // описание делегируемого метода
+        {   // начало метода
+            Console.WriteLine(message); // вывод строки в консоль
+        }   // конец метода
         static readonly string errorMessage = "Incorrect input data";   // поле для чтения
+
         static void Main(string[] args) // реализация запускающего метода Main
         {   // начало тела метода Main
             const string TITLE = "RobCo Industries";    // пример константы
-            Print _del;
-            string message = "";
+            Print _del; // инициализация делегата
+            string message = "";    //  инициализация строки
             //Memory m = new Memory(); // выделили память под объект "Память"
             Calculator calc = new Calculator(TITLE); // инициализация экземпляра класса Calculator
             Period period = new Period();  // инициализацая экземпляра класса Period
@@ -148,8 +149,8 @@ namespace SampleApp1    // объявление пространства име�
                             //Console.WriteLine("Ans = " + calc.Add(tuple.Item1, tuple.Item2) + "\n");
                             {
                                 message = "Ans = " + calc.Add(tuple.Item1, tuple.Item2) + "\n";
-                                _del = Display;
-                                if (_del != null) _del(message);
+                                _del = Display; // передача метода делегату
+                                if (_del != null) _del(message); // если указатель не пустой, то выполнить делегируемый метод
                             }
                             else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); }
                             break;  // выход из тела оператора switch
@@ -159,8 +160,8 @@ namespace SampleApp1    // объявление пространства име�
                             //Console.WriteLine("Ans = " + calc.Sub(tuple.Item1, tuple.Item2) + "\n");
                             {
                                 message = "Ans = " + calc.Sub(tuple.Item1, tuple.Item2) + "\n";
-                                _del = Display;
-                                if (_del != null) _del(message);
+                                _del = Display; // передача метода делегату
+                                if (_del != null) _del(message); // если указатель не пустой, то выполнить делегируемый метод
                             }
                             else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); }
                             break;  // выход из тела оператора switch
@@ -171,8 +172,8 @@ namespace SampleApp1    // объявление пространства име�
                                                 // Console.WriteLine("Ans = " + calc.Mul(tuple.Item1, tuple.Item2) + "\n");
                             {
                                 message = "Ans = " + calc.Mul(tuple.Item1, tuple.Item2) + "\n";
-                                _del = Display;
-                                if (_del != null) _del(message);
+                                _del = Display; // передача метода делегату
+                                if (_del != null) _del(message); // если указатель не пустой, то выполнить делегируемый метод
                             }
                             else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // иначе сообщение об ошибке
                             break;  // выход из тела оператора switch
@@ -183,8 +184,8 @@ namespace SampleApp1    // объявление пространства име�
                                                     //  Console.WriteLine("Ans = " + calc.Div(tupleDouble.Item1, tupleDouble.Item2) + "\n");
                             {
                                 message = "Ans = " + calc.Div(tupleDouble.Item1, tupleDouble.Item2) + "\n";
-                                _del = Display;
-                                if (_del != null) _del(message);
+                                _del = Display; // передача метода делегату
+                                if (_del != null) _del(message); // если указатель не пустой, то выполнить делегируемый метод
                             }
                             else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // иначе сообщение об ошибке
                             break;  // выход из тела оператора 
@@ -195,8 +196,8 @@ namespace SampleApp1    // объявление пространства име�
                                                  // Console.WriteLine("Ans = " + calc.Or(tupleInt.Item1, tupleInt.Item2) + "\n");
                             {
                                 message = "Ans = " + calc.Or(tupleInt.Item1, tupleInt.Item2) + "\n";
-                                _del = Display;
-                                if (_del != null) _del(message);
+                                _del = Display; // передача метода делегату
+                                if (_del != null) _del(message); // если указатель не пустой, то выполнить делегируемый метод
                             }
                             else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); }
                             break;  // выход из тела оператора switch
@@ -207,8 +208,8 @@ namespace SampleApp1    // объявление пространства име�
                                                  //Console.WriteLine("Ans = " + calc.And(tupleInt.Item1, tupleInt.Item2) + "\n");
                             {
                                 message = "Ans = " + calc.And(tupleInt.Item1, tupleInt.Item2) + "\n";
-                                _del = Display;
-                                if (_del != null) _del(message);
+                                _del = Display; // передача метода делегату
+                                if (_del != null) _del(message); // если указатель не пустой, то выполнить делегируемый метод
                             }
                             else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // иначе сообщение об ошибке
                             break;  // выход из тела оператора switch
@@ -219,8 +220,8 @@ namespace SampleApp1    // объявление пространства име�
                                                  //Console.WriteLine("Ans = " + calc.Xor(tupleInt.Item1, tupleInt.Item2) + "\n");
                             {
                                 message = "Ans = " + calc.Xor(tupleInt.Item1, tupleInt.Item2) + "\n";
-                                _del = Display;
-                                if (_del != null) _del(message);
+                                _del = Display; // передача метода делегату
+                                if (_del != null) _del(message); // если указатель не пустой, то выполнить делегируемый метод
                             }
                             else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // сообщение об ошибке
                             break;  // выход из тела оператора switch
@@ -233,8 +234,8 @@ namespace SampleApp1    // объявление пространства име�
                             {
                                 message = $"Factorial({tupleSingle.Item1}) = "
                                     + calc.Factorial((int)tupleSingle.Item1, true) + "\n";
-                                _del = Display;
-                                if (_del != null) _del(message);
+                                _del = Display; // передача метода делегату
+                                if (_del != null) _del(message); // если указатель не пустой, то выполнить делегируемый метод
                             }
                             else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // иначе ошибка
                             break;  // выход из тела оператора switch
@@ -247,8 +248,8 @@ namespace SampleApp1    // объявление пространства име�
                             {
                                 message = "Sum of array = "
                                     + calc.SumArray(tupleArray.Item1) + "\n";
-                                _del = Display;
-                                if (_del != null) _del(message);
+                                _del = Display; // передача метода делегату
+                                if (_del != null) _del(message); // если указатель не пустой, то выполнить делегируемый метод
                             }
                             else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // иначе ошибка
                             break; // конец условия
@@ -263,7 +264,7 @@ namespace SampleApp1    // объявление пространства име�
                                 string res = $"Years: {period.Years} Months: {period.Months} Days: {period.Days}";
                                 Memory.List = res;  // добавление в историю записи о вычислении
                                                     //Console.WriteLine($"{res}\n");  // вывод результата в консоль
-                                _del = Display;
+                                _del = Display; // передача метода делегату
                                 if (_del != null) _del(res);
                             }   // конец логического условия
                             else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // иначе ошибка
@@ -292,7 +293,7 @@ namespace SampleApp1    // объявление пространства име�
                                 string res = $"Days: {days.Days}";
                                 Memory.List = res;  // добавление в историю записи о вычислении
                                 //Console.WriteLine($"{res}\n");  // вывод результата в консоль
-                                _del = Display;
+                                _del = Display; // передача метода делегату
                                 if (_del != null) _del(res);
                             }   // конец логического условия
                             else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // иначе ошибка
@@ -312,7 +313,7 @@ namespace SampleApp1    // объявление пространства име�
                                         var result = circle.ToString(); // формирование результата и представление в текстовом виде
                                         Memory.List = result;   // запись результатов в память
                                         //Console.WriteLine(result);  // вывод результатов в консоль
-                                        _del = Display;
+                                        _del = Display; // передача метода делегату
                                         if (_del != null) _del(result);
                                     }   // конец логического условия
                                     else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // сообщение об ошибки
@@ -326,7 +327,7 @@ namespace SampleApp1    // объявление пространства име�
                                         var result = quadrate.ToString();   // подсчет
                                         Memory.List = result;   // запись в память
                                         //Console.WriteLine(result);  // вывод в консоль
-                                        _del = Display;
+                                        _del = Display; // передача метода делегату
                                         if (_del != null) _del(result);
                                     }   // конец if
                                     else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // сообщение об ошибке
@@ -343,7 +344,7 @@ namespace SampleApp1    // объявление пространства име�
                                         var result = rectangle.ToString();  // формирование результата
                                         Memory.List = result;   // запись в память результата
                                         //Console.WriteLine(result);  // вывод в консоль результата
-                                        _del = Display;
+                                        _del = Display; // передача метода делегату
                                         if (_del != null) _del(result);
                                     }   // end if
                                     else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // сообщение об ошибке
