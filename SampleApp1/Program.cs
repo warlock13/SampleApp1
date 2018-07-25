@@ -19,12 +19,20 @@ namespace SampleApp1    // объявление пространства име�
         Geometry = 12
     }   // конец перечисления
 
+    public delegate void Print(string message);
+
     class Program   // инициализация главного класса
     {   // начало тела класса 
+        public static void Display(string message)
+        {
+            Console.WriteLine(message);
+        }
         static readonly string errorMessage = "Incorrect input data";   // поле для чтения
         static void Main(string[] args) // реализация запускающего метода Main
         {   // начало тела метода Main
             const string TITLE = "RobCo Industries";    // пример константы
+            Print _del;
+            string message = "";
             //Memory m = new Memory(); // выделили память под объект "Память"
             Calculator calc = new Calculator(TITLE); // инициализация экземпляра класса Calculator
             Period period = new Period();  // инициализацая экземпляра класса Period
@@ -137,64 +145,111 @@ namespace SampleApp1    // объявление пространства име�
                         case (int)operation.Add:   // сценарий, если было введено "1"
                             var tuple = calc.GetDoubleOperands();
                             if (tuple.Item3)
-                                Console.WriteLine("Ans = " + calc.Add(tuple.Item1, tuple.Item2) + "\n");
+                            //Console.WriteLine("Ans = " + calc.Add(tuple.Item1, tuple.Item2) + "\n");
+                            {
+                                message = "Ans = " + calc.Add(tuple.Item1, tuple.Item2) + "\n";
+                                _del = Display;
+                                if (_del != null) _del(message);
+                            }
                             else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); }
                             break;  // выход из тела оператора switch
                         case (int)operation.Sub:   // сценарий, если было введено "2"
                             tuple = calc.GetDoubleOperands();
                             if (tuple.Item3)
-                                Console.WriteLine("Ans = " + calc.Sub(tuple.Item1, tuple.Item2) + "\n");
+                            //Console.WriteLine("Ans = " + calc.Sub(tuple.Item1, tuple.Item2) + "\n");
+                            {
+                                message = "Ans = " + calc.Sub(tuple.Item1, tuple.Item2) + "\n";
+                                _del = Display;
+                                if (_del != null) _del(message);
+                            }
                             else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); }
                             break;  // выход из тела оператора switch
                         case (int)operation.Mul:   // сценарий, если было введено "3"
                             tuple = calc.GetDoubleOperands();  // инициализация кортежа
                             if (tuple.Item3)    // если признак ошибки отсутствует
-                                // вывести в консоль результат вычисления
-                                Console.WriteLine("Ans = " + calc.Mul(tuple.Item1, tuple.Item2) + "\n");
+                                                // вывести в консоль результат вычисления
+                                                // Console.WriteLine("Ans = " + calc.Mul(tuple.Item1, tuple.Item2) + "\n");
+                            {
+                                message = "Ans = " + calc.Mul(tuple.Item1, tuple.Item2) + "\n";
+                                _del = Display;
+                                if (_del != null) _del(message);
+                            }
                             else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // иначе сообщение об ошибке
                             break;  // выход из тела оператора switch
                         case (int)operation.Div:   // сценарий, если было введено "4"
                             var tupleDouble = calc.GetDoubleOperands(); // инициализация котрежа
                             if (tupleDouble.Item3)  // если признак ошибки отсутствует
-                                // вывести в консоль результат вычисления
-                                Console.WriteLine("Ans = " + calc.Div(tupleDouble.Item1, tupleDouble.Item2) + "\n");
+                                                    // вывести в консоль результат вычисления
+                                                    //  Console.WriteLine("Ans = " + calc.Div(tupleDouble.Item1, tupleDouble.Item2) + "\n");
+                            {
+                                message = "Ans = " + calc.Div(tupleDouble.Item1, tupleDouble.Item2) + "\n";
+                                _del = Display;
+                                if (_del != null) _del(message);
+                            }
                             else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // иначе сообщение об ошибке
                             break;  // выход из тела оператора 
                         case (int)operation.Or: // если было введено "6"
                             var tupleInt = calc.GetIntOperands(); // инициализация кортежа
                             if (tupleInt.Item3)  // если признак ошибки отсутствует
-                                // вывести в консоль результат вычисления
-                                Console.WriteLine("Ans = " + calc.Or(tupleInt.Item1, tupleInt.Item2) + "\n");
+                                                 // вывести в консоль результат вычисления
+                                                 // Console.WriteLine("Ans = " + calc.Or(tupleInt.Item1, tupleInt.Item2) + "\n");
+                            {
+                                message = "Ans = " + calc.Or(tupleInt.Item1, tupleInt.Item2) + "\n";
+                                _del = Display;
+                                if (_del != null) _del(message);
+                            }
                             else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); }
                             break;  // выход из тела оператора switch
                         case (int)operation.And:    // если было введено "5"
                             tupleInt = calc.GetIntOperands();  // ввод с клавиатуры int-операторов
                             if (tupleInt.Item3)  // если признак ошибки отсутствует
-                                // вывести в консоль результат вычисления
-                                Console.WriteLine("Ans = " + calc.And(tupleInt.Item1, tupleInt.Item2) + "\n");
+                                                 // вывести в консоль результат вычисления
+                                                 //Console.WriteLine("Ans = " + calc.And(tupleInt.Item1, tupleInt.Item2) + "\n");
+                            {
+                                message = "Ans = " + calc.And(tupleInt.Item1, tupleInt.Item2) + "\n";
+                                _del = Display;
+                                if (_del != null) _del(message);
+                            }
                             else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // иначе сообщение об ошибке
                             break;  // выход из тела оператора switch
                         case (int)operation.Xor:    // если было введено "7"
                             tupleInt = calc.GetIntOperands(); // кортеж
                             if (tupleInt.Item3)  // если признак ошибки отсутствует
-                                // вывести в консоль результат вычисления
-                                Console.WriteLine("Ans = " + calc.Xor(tupleInt.Item1, tupleInt.Item2) + "\n");
+                                                 // вывести в консоль результат вычисления
+                                                 //Console.WriteLine("Ans = " + calc.Xor(tupleInt.Item1, tupleInt.Item2) + "\n");
+                            {
+                                message = "Ans = " + calc.Xor(tupleInt.Item1, tupleInt.Item2) + "\n";
+                                _del = Display;
+                                if (_del != null) _del(message);
+                            }
                             else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // сообщение об ошибке
                             break;  // выход из тела оператора switch
                         case (int)operation.Factorial:  // если было введено "8"
                             var tupleSingle = calc.GetSingleOperator(); // ввод N с клавиатуры
                             if (tupleSingle.Item2)  // если признак ошибки отсутствует
                                 // вывести в консоль результат вычисления
-                                Console.WriteLine($"Factorial({tupleSingle.Item1}) = "
-                                    + calc.Factorial((int)tupleSingle.Item1, true) + "\n");
+                                //Console.WriteLine($"Factorial({tupleSingle.Item1}) = "
+                                //    + calc.Factorial((int)tupleSingle.Item1, true) + "\n");
+                            {
+                                message = $"Factorial({tupleSingle.Item1}) = "
+                                    + calc.Factorial((int)tupleSingle.Item1, true) + "\n";
+                                _del = Display;
+                                if (_del != null) _del(message);
+                            }
                             else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // иначе ошибка
                             break;  // выход из тела оператора switch
                         case (int)operation.SumArray:   // если было введено "9"
                             var tupleArray = calc.GetArray();   // ввод массива с клавиатуры
                             if (tupleArray.Item2)  // если признак ошибки отсутствует
                                 // вывести в консоль результат вычисления
-                                Console.WriteLine("Sum of array = "
-                                    + calc.SumArray(tupleArray.Item1) + "\n");
+                                //Console.WriteLine("Sum of array = "
+                                //    + calc.SumArray(tupleArray.Item1) + "\n");
+                            {
+                                message = "Sum of array = "
+                                    + calc.SumArray(tupleArray.Item1) + "\n";
+                                _del = Display;
+                                if (_del != null) _del(message);
+                            }
                             else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // иначе ошибка
                             break; // конец условия
                         case (int)operation.Days:   // если было введено "10"
@@ -207,7 +262,9 @@ namespace SampleApp1    // объявление пространства име�
                                 // формирование строки-ответа
                                 string res = $"Years: {period.Years} Months: {period.Months} Days: {period.Days}";
                                 Memory.List = res;  // добавление в историю записи о вычислении
-                                Console.WriteLine($"{res}\n");  // вывод результата в консоль
+                                                    //Console.WriteLine($"{res}\n");  // вывод результата в консоль
+                                _del = Display;
+                                if (_del != null) _del(res);
                             }   // конец логического условия
                             else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // иначе ошибка
                             break;  // выход из тела оператора switch
@@ -234,7 +291,9 @@ namespace SampleApp1    // объявление пространства име�
                                 // формирование строки-ответа
                                 string res = $"Days: {days.Days}";
                                 Memory.List = res;  // добавление в историю записи о вычислении
-                                Console.WriteLine($"{res}\n");  // вывод результата в консоль
+                                //Console.WriteLine($"{res}\n");  // вывод результата в консоль
+                                _del = Display;
+                                if (_del != null) _del(res);
                             }   // конец логического условия
                             else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // иначе ошибка
                             break;  // выход из тела оператора switch
@@ -252,7 +311,9 @@ namespace SampleApp1    // объявление пространства име�
                                         Circle circle = new Circle { Radius = tupleSingle.Item1 };  // инициализация окружности
                                         var result = circle.ToString(); // формирование результата и представление в текстовом виде
                                         Memory.List = result;   // запись результатов в память
-                                        Console.WriteLine(result);  // вывод результатов в консоль
+                                        //Console.WriteLine(result);  // вывод результатов в консоль
+                                        _del = Display;
+                                        if (_del != null) _del(result);
                                     }   // конец логического условия
                                     else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // сообщение об ошибки
                                     break;  // конец сценария
@@ -264,7 +325,9 @@ namespace SampleApp1    // объявление пространства име�
                                         Quadrate quadrate = new Quadrate { Edge = tupleSingle.Item1 };  // инициализация квадрата
                                         var result = quadrate.ToString();   // подсчет
                                         Memory.List = result;   // запись в память
-                                        Console.WriteLine(result);  // вывод в консоль
+                                        //Console.WriteLine(result);  // вывод в консоль
+                                        _del = Display;
+                                        if (_del != null) _del(result);
                                     }   // конец if
                                     else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // сообщение об ошибке
                                     break;  // конец сценария
@@ -279,7 +342,9 @@ namespace SampleApp1    // объявление пространства име�
                                         };  // конец инициализации
                                         var result = rectangle.ToString();  // формирование результата
                                         Memory.List = result;   // запись в память результата
-                                        Console.WriteLine(result);  // вывод в консоль результата
+                                        //Console.WriteLine(result);  // вывод в консоль результата
+                                        _del = Display;
+                                        if (_del != null) _del(result);
                                     }   // end if
                                     else { stat.ErrorsOccured++; Console.WriteLine(errorMessage); } // сообщение об ошибке
                                     break;  // конец сценария
